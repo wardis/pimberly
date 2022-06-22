@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { ReposTable } from './components/ReposTable';
+import { SearchBar } from './components/SearchBar';
 
 import {
   ChakraProvider,
@@ -16,37 +16,11 @@ import {
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
 function App() {
-  const [term, setTerm] = useState('');
+  const PER_PAGE = 25;
+
   const [repos, setRepos] = useState([]);
+  const [totalRepos, setTotalRepos] = useState(0);
   const [loading, setLoading] = useState(false);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (term === '') return;
-
-    fetchRepos();
-  };
-
-  const fetchRepos = async () => {
-    setLoading(true);
-
-    const url = 'https://api.github.com/search/repositories';
-    await axios
-      .get(url, {
-        params: {
-          sort: 'stars',
-          per_page: 25,
-          q: term,
-        },
-      })
-      .then(res => {
-        const { data } = res;
-        if (data.items.length) setRepos(data.items);
-      })
-      .catch(err => console.log(err));
-
-    setLoading(false);
-  };
 
   return (
     <ChakraProvider theme={theme}>
@@ -56,14 +30,17 @@ function App() {
           <VStack spacing={8} alignItems="center">
             <Heading>GitHub Repos</Heading>
 
-            <HStack as="form" onSubmit={handleSubmit}>
-              <Input
-                placeholder="Search term..."
-                onChange={e => setTerm(e.target.value)}
-              />
-              <Button type="submit" variant="outline">
-                Search
-              </Button>
+            <SearchBar
+              perPage={PER_PAGE}
+              setLoading={setLoading}
+              setRepos={setRepos}
+              setTotalRepos={setTotalRepos}
+            />
+
+            <HStack spacing={8}>
+              <Button>Prev</Button>
+              <p>Count: {totalRepos} | Page: 1 </p>
+              <Button>Next</Button>
             </HStack>
 
             <ReposTable repos={repos} loading={loading} />
