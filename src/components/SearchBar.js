@@ -1,10 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { HStack, Input, Button } from '@chakra-ui/react';
 
-export const SearchBar = ({ setLoading, setRepos, setTotalRepos, perPage }) => {
+export const SearchBar = ({
+  setLoading,
+  setRepos,
+  setTotalRepos,
+  perPage,
+  currentPage,
+}) => {
   const [term, setTerm] = useState('');
+
+  useEffect(() => {
+    if (term === '') return;
+
+    fetchRepos();
+  }, [currentPage]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -23,6 +35,7 @@ export const SearchBar = ({ setLoading, setRepos, setTotalRepos, perPage }) => {
           sort: 'stars',
           per_page: perPage,
           q: term,
+          page: currentPage,
         },
       })
       .then(res => {

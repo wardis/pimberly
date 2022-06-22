@@ -10,7 +10,7 @@ import {
   VStack,
   Heading,
   HStack,
-  Input,
+  Text,
   Button,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
@@ -21,6 +21,7 @@ function App() {
   const [repos, setRepos] = useState([]);
   const [totalRepos, setTotalRepos] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(2);
 
   return (
     <ChakraProvider theme={theme}>
@@ -35,12 +36,20 @@ function App() {
               setLoading={setLoading}
               setRepos={setRepos}
               setTotalRepos={setTotalRepos}
+              currentPage={currentPage}
             />
 
             <HStack spacing={8}>
-              <Button>Prev</Button>
-              <p>Count: {totalRepos} | Page: 1 </p>
-              <Button>Next</Button>
+              <Button onClick={() => setCurrentPage(prev => prev - 1)}>
+                Prev
+              </Button>
+              <Text>
+                Count: {totalRepos} | Page: {currentPage}/
+                {Math.ceil(totalRepos / PER_PAGE)}
+              </Text>
+              <Button onClick={() => setCurrentPage(prev => prev + 1)}>
+                Next
+              </Button>
             </HStack>
 
             <ReposTable repos={repos} loading={loading} />
