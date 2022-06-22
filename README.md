@@ -1,4 +1,20 @@
+# GitHub Search - Pimberly
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Project Notes
+
+### What you have done in the coding challenge
+- Create the basic layout (header and search bar) using [Chakra-ui](https://chakra-ui.com/)
+- Fetch and display repository information after a search (axios)
+- Split code into different components with different responsibilities
+- Build my own pagination system (I could have used a package but it was more interesting to do it myself this time.)
+
+### Any further improvements you could make
+- SearchBar and Pagination share some props (the list could have been longer) it may be a good idea to introduce react Context instead of repeating the props.
+- Instead of loading 25 repos we could preload 100 repos everytime and do a frontend pagination. It would allow to reduce api calls.
+- display formatted star count 65253 => 65k.
+- Pagination: display clickable page numbers [1, 2, 3, ..., 8,9,10] to allow quick navigation (although it seems unecessary in our case as people would be more interested in the first few pages).
 
 ## Available Scripts
 
@@ -11,58 +27,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

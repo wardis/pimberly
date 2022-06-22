@@ -10,9 +10,6 @@ import {
   theme,
   VStack,
   Heading,
-  HStack,
-  Text,
-  Button,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 
