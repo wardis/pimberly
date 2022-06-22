@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { ReposTable } from './components/ReposTable';
 
 import {
   ChakraProvider,
@@ -21,6 +22,7 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (term === '') return;
 
     fetchRepos();
   };
@@ -59,22 +61,12 @@ function App() {
                 placeholder="Search term..."
                 onChange={e => setTerm(e.target.value)}
               />
-              <Button
-                type="submit"
-                isLoading={loading}
-                loadingText="Searching"
-                variant="outline"
-              >
+              <Button type="submit" variant="outline">
                 Search
               </Button>
             </HStack>
 
-            {repos &&
-              repos.map(repo => (
-                <p key={repo.id}>
-                  {repo.name} - {repo.stargazers_count}
-                </p>
-              ))}
+            <ReposTable repos={repos} loading={loading} />
           </VStack>
         </Grid>
       </Box>
