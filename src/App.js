@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ReposTable } from './components/ReposTable';
 import { SearchBar } from './components/SearchBar';
+import { Pagination } from './components/Pagination';
 
 import {
   ChakraProvider,
@@ -21,7 +22,7 @@ function App() {
   const [repos, setRepos] = useState([]);
   const [totalRepos, setTotalRepos] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
 
   return (
     <ChakraProvider theme={theme}>
@@ -39,18 +40,14 @@ function App() {
               currentPage={currentPage}
             />
 
-            <HStack spacing={8}>
-              <Button onClick={() => setCurrentPage(prev => prev - 1)}>
-                Prev
-              </Button>
-              <Text>
-                Count: {totalRepos} | Page: {currentPage}/
-                {Math.ceil(totalRepos / PER_PAGE)}
-              </Text>
-              <Button onClick={() => setCurrentPage(prev => prev + 1)}>
-                Next
-              </Button>
-            </HStack>
+            {repos.length && (
+              <Pagination
+                perPage={PER_PAGE}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                totalRepos={totalRepos}
+              />
+            )}
 
             <ReposTable repos={repos} loading={loading} />
           </VStack>
